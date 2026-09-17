@@ -5,7 +5,7 @@ type User = { id: number; username: string; email: string; role: "ADMIN" | "USER
 type Student = { id: number; student_id: string; name: string; email: string; course: string; year: number; department: string };
 type StudentDraft = Omit<Student, "id">;
 type Page = "home" | "dashboard" | "students" | "assets" | "matrix" | "report" | "about";
-const API = "http://127.0.0.1:8001";
+const API = import.meta.env.VITE_API_URL || "http://127.0.0.1:8001";
 const assets = [
   ["Web Tier", "Presents the application interface to users.", "Cross-site scripting and exposed client data.", "TypeScript UI, input escaping, and limited CORS."],
   ["Application Tier", "Processes business rules and security decisions.", "Broken authorization or unsafe input handling.", "FastAPI validation, JWT checks, and role authorization."],

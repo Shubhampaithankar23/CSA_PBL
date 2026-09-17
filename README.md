@@ -14,9 +14,7 @@ Copy-Item .env.example .env
 uvicorn app.main:app --reload --port 8001
 ```
 
-The first startup creates the SQLite database and demo accounts:
-- `admin` / `Admin@123`
-- `student` / `User@123`
+The first startup creates the local database. Set your own account credentials before using the application; credentials are intentionally not documented in this repository.
 
 ### Frontend
 ```powershell
