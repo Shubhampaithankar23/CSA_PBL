@@ -1,0 +1,29 @@
+services:
+  - type: web
+    name: secure-3-tier-backend
+    runtime: python
+    rootDir: backend
+    buildCommand: pip install -r requirements.txt
+    startCommand: uvicorn app.main:app --host 0.0.0.0 --port $PORT
+    healthCheckPath: /health
+    envVars:
+      - key: JWT_SECRET
+        generateValue: true
+      - key: JWT_ALGORITHM
+        value: HS256
+      - key: ACCESS_TOKEN_EXPIRE_MINUTES
+        value: "60"
+      - key: FRONTEND_ORIGINS
+        sync: false
+      - key: ADMIN_USERNAME
+        sync: false
+      - key: ADMIN_EMAIL
+        sync: false
+      - key: ADMIN_PASSWORD
+        sync: false
+      - key: USER_USERNAME
+        sync: false
+      - key: USER_EMAIL
+        sync: false
+      - key: USER_PASSWORD
+        sync: false

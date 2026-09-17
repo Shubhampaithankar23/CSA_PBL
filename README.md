@@ -27,3 +27,9 @@ Open `http://localhost:5173`. The backend runs at `http://127.0.0.1:8001`.
 
 ## Security controls
 JWT authentication, bcrypt password hashing, backend role authorization, Pydantic input validation, SQLAlchemy ORM, protected APIs, environment-based configuration, and restricted CORS.
+
+## Hosting
+
+Deploy the `frontend` folder as a Vercel project. Set `VITE_API_URL` to the deployed Render backend URL.
+
+Deploy the backend with the included `render.yaml`. Set `FRONTEND_ORIGINS` to the Vercel URL and provide the account values through Render environment variables. Do not place passwords or JWT secrets in GitHub, Vercel, or this README.
