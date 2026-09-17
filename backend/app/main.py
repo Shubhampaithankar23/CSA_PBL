@@ -25,10 +25,14 @@ app.add_middleware(
 def seed_database():
     Base.metadata.create_all(bind=engine)
     with Session(engine) as db:
-        if not db.scalar(select(User).where(User.username == "admin")):
+        if not db.scalar(select(User)):
+            admin_password = os.getenv("ADMIN_PASSWORD")
+            user_password = os.getenv("USER_PASSWORD")
+            if not admin_password or not user_password:
+                raise RuntimeError("ADMIN_PASSWORD and USER_PASSWORD must be set before creating users")
             db.add_all([
-                User(username="admin", email="admin@example.com", password_hash=hash_password("Admin@123"), role="ADMIN"),
-                User(username="student", email="student@example.com", password_hash=hash_password("User@123"), role="USER"),
+                User(username=os.getenv("ADMIN_USERNAME", "admin"), email=os.getenv("ADMIN_EMAIL", "admin@example.com"), password_hash=hash_password(admin_password), role="ADMIN"),
+                User(username=os.getenv("USER_USERNAME", "student"), email=os.getenv("USER_EMAIL", "student@example.com"), password_hash=hash_password(user_password), role="USER"),
             ])
         if not db.scalar(select(Student)):
             db.add_all([
